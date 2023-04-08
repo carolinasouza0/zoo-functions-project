@@ -38,9 +38,10 @@ describe('Testes da função getOpeningHours', () => {
     expect(() => { getOpeningHours('quinta', '11:35-PM'); }).toThrow('The day must be valid. Example: Monday');
   });
   it('Verifica se a função traz a resposta correta de acordo com os horários e dias do funcionamento do zoo', () => {
-    expect(getOpeningHours('Tuesday', '10:35-Pm')).toBe('The zoo is closed');
+    const closed = 'The zoo is closed';
+    expect(getOpeningHours('Tuesday', '10:35-Pm')).toBe(closed);
     expect(getOpeningHours('Wednesday', '12:30-PM')).toBe('The zoo is open');
-    expect(getOpeningHours('Saturday', '12:30-AM')).toBe('The zoo is closed');
-    expect(getOpeningHours('Monday', '09:00-AM')).toBe('The zoo is closed');
+    expect(getOpeningHours('Saturday', '12:30-AM')).toBe(closed);
+    expect(getOpeningHours('Monday', '09:00-AM')).toBe(closed);
   });
 });
