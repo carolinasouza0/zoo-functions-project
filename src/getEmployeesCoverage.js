@@ -1,10 +1,11 @@
 const data = require('../data/zoo_data');
 
+const { species, employees } = data;
+
 const getEmployee = (obj) => {
-  const employee = data.employees.find((worker) => worker.firstName === obj.name
+  const employee = employees.find((worker) => worker.firstName === obj.name
       || worker.lastName === obj.name
       || worker.id === obj.id);
-
   if (!employee) {
     throw new Error('Informações inválidas');
   }
@@ -14,9 +15,9 @@ const getEmployee = (obj) => {
 const getSpecies = (employee) => {
   const animals = [];
   const employeeResponsible = getEmployee(employee).responsibleFor;
-  data.species.forEach((species) => {
-    if (employeeResponsible.includes(species.id)) {
-      animals.push(species.name);
+  species.forEach((specie) => {
+    if (employeeResponsible.includes(specie.id)) {
+      animals.push(specie.name);
     }
   });
   return animals;
@@ -25,42 +26,45 @@ const getSpecies = (employee) => {
 const getLocation = (employee) => {
   const location = [];
   const animals = getSpecies(employee);
-  data.species.forEach((species) => {
-    if (animals.includes(species.name)) {
-      location.push(species.location);
+  species.forEach((specie) => {
+    if (animals.includes(specie.name)) {
+      location.push(specie.location);
     }
   });
   return location;
 };
-// REVER ESSAS FUNÇÕES
 
-// const getEmployeesCoverageNoInfo = () => data.employees.forEach((person) => {
-//   const { id } = person;
-//   const fullName = `${person.firstName} ${person.lastName}`;
-//   const species = getSpecies(person);
-//   const locations = getLocation(person);
-//   return {
-//     id,
-//     fullName,
-//     species,
-//     locations,
-//   };
-// });
+// const getEmployeesCoverageNoInfo = () => {
+//   const allEmployes = [];
+//   employees.forEach((emp) => {
+//     const animals = getSpecies(emp.id);
+//     const locations = getLocation(emp.id);
+//     allEmployes.push({
+//       id: emp.id,
+//       fullName: `${emp.firstName} ${emp.lastName}`,
+//       species: animals,
+//       locations,
+//     });
+//   });
+//   return allEmployes;
+// };
 
-// console.log(getEmployeesCoverageNoInfo());
-
-// const getEmployeesCoverage = (employeeInfo) => {
-//   let objReturned = {};
-//   if (!employeeInfo) {
-//     objReturned = getEmployeesCoverageNoInfo();
-//   } else {
-//   id = getEmployee(employeeInfo).id;
-//   fullName = `${getEmployee(employeeInfo).firstName} ${getEmployee(employeeInfo).lastName}`;
-//   species = getSpecies(employeeInfo);
-//   locations = getLocation(employeeInfo);
-//   return objReturned;
-//   }
-// }
-
-// console.log(getEmployeesCoverage());
+const getEmployeesCoverage = (employeeInfo = {}) => {
+  if (employeeInfo) {
+    const worker = getEmployee(employeeInfo);
+    const { id } = worker;
+    const specie = getSpecies(employeeInfo);
+    const locations = getLocation(employeeInfo);
+    return {
+      id,
+      fullName: `${worker.firstName} ${worker.lastName}`,
+      species: specie,
+      locations,
+    };
+  // } else {
+  //   return getEmployeesCoverageNoInfo();
+  // }
+  }
+};
+console.log(getEmployeesCoverage({ name: 'Spry' }));
 module.exports = getEmployeesCoverage;
