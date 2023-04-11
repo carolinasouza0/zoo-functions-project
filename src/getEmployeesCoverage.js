@@ -32,24 +32,35 @@ const getLocation = (employee) => {
   });
   return location;
 };
+// REVER ESSAS FUNÇÕES
 
-const getEmployeesCoverage = (employeeInfo) => {
+// const getEmployeesCoverageNoInfo = () => data.employees.forEach((person) => {
+//   const { id } = person;
+//   const fullName = `${person.firstName} ${person.lastName}`;
+//   const species = getSpecies(person);
+//   const locations = getLocation(person);
+//   return {
+//     id,
+//     fullName,
+//     species,
+//     locations,
+//   };
+// });
+
+// console.log(getEmployeesCoverageNoInfo());
+
+// const getEmployeesCoverage = (employeeInfo) => {
 //   let objReturned = {};
 //   if (!employeeInfo) {
-//     data.employees.map((person) => {
-//       objReturned[id] = person.id;
-//       objReturned[fullName] = `${person.firstName} ${person.lastName}`;
-//       objReturned[species] = getSpecies(person);
-//       objReturned[locations] = getLocation(person);
-//     });
+//     objReturned = getEmployeesCoverageNoInfo();
 //   } else {
-//     objReturned[id] = getEmployee(employeeInfo).id;
-//     objReturned[fullName] = `${getEmployee(employeeInfo).firstName} 
-//       ${getEmployee(employeeInfo).lastName}`;
-//     objReturned[species] = getSpecies(employeeInfo);
-//     objReturned[locations] = getLocation(employeeInfo);
-//   }
+//   id = getEmployee(employeeInfo).id;
+//   fullName = `${getEmployee(employeeInfo).firstName} ${getEmployee(employeeInfo).lastName}`;
+//   species = getSpecies(employeeInfo);
+//   locations = getLocation(employeeInfo);
 //   return objReturned;
-};
+//   }
+// }
 
+// console.log(getEmployeesCoverage());
 module.exports = getEmployeesCoverage;
